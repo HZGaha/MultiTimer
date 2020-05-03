@@ -70,7 +70,7 @@ void timer_loop()
 {
 	struct Timer* target;
 	for(target=head_handle; target; target=target->next) {
-		if(_timer_ticks >= target->timeout) {
+		if((int)((uint32_t)(target->timeout -_timer_ticks)) <= 0) {
 			if(target->repeat == 0) {
 				timer_stop(target);
 			} else {
